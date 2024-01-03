@@ -1,3 +1,6 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -7,13 +10,17 @@ import static java.util.Objects.isNull;
 public class Hippodrome {
 
     private final List<Horse> horses;
+    private static final Logger log = LogManager.getLogger(Main.class);
 
     public Hippodrome(List<Horse> horses) {
         if (isNull(horses)) {
-            throw new IllegalArgumentException("Horses cannot be null.");
+            log.error("Horses list is null.");
+            throw new IllegalArgumentException("Horses cannot be null");
         } else if (horses.isEmpty()) {
-            throw new IllegalArgumentException("Horses cannot be empty.");
+            log.error("Horses list is empty.");
+            throw new IllegalArgumentException("Horses cannot be empty");
         }
+        log.debug("Cоздание Hippodrome, лошадей [{}]", horses.size());
         this.horses = horses;
     }
 
